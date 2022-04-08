@@ -1,4 +1,4 @@
-const p = document.querySelector('p');
+const p = document.querySelector('p')
 console.log('im in another file');
 
 const age = 100;
