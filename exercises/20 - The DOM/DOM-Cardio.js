@@ -1,11 +1,11 @@
 // Make a div
-const imageDiv = document.createElement('div');
+const div = document.createElement('div');
 
 // add a class of wrapper to it
-imageDiv.classList.add('wrapper');
+div.classList.add('wrapper');
 
 // put it into the body
-document.body.appendChild(imageDiv);
+document.body.appendChild(div);
 
 // make an unordered list
 // const list = document.createElement('ul');
@@ -18,8 +18,12 @@ const list = `
   </ul>
 `;
 // put that list into the above wrapper
-const myListFragment = document.createRange().createContextualFragment(list);
-document.body.prepend(myListFragment);
+// const myListFragment = document.createRange().createContextualFragment(list);
+// document.body.prepend(myListFragment);
+
+// or
+div.innerHTML = list;
+console.log(div);
 
 // create an image
 const myImage = document.createElement('img');
@@ -32,7 +36,7 @@ myImage.classList.add('cute');
 // add an alt of Cute Puppy
 myImage.alt = 'cute puppy';
 // Append that image to the wrapper
-imageDiv.append(myImage);
+div.append(myImage);
 // with HTML string, make a div, with two paragraphs inside of it
 // put this div before the unordered list from above
 const paragraphsDiv = document.createElement('div')
@@ -55,8 +59,8 @@ function generatePlayerCard(name, age, height) {
 
   functionDiv.innerHTML = `
   <h2>${name} – ${age}</h2>
-  <p>They are ${height} and ${age} years old. In Dog years this person would be AGEINDOGYEARS. That would be a tall dog!</p>
-  <button type="button">Delete?</button>
+  <p>They are ${height} and ${age} years old. In Dog years this person would be ${age * 7}. That would be a tall dog!</p>
+  <button class="delete" type="button">&times; Delete?</button>
   `;
 
   return functionDiv;
@@ -84,13 +88,17 @@ cardsDiv.append(ceu);
 cardsDiv.append(lina);
 
 // put the div into the DOM just before the wrapper element
-imageDiv.insertAdjacentElement('beforebegin', cardsDiv);
+div.insertAdjacentElement('beforebegin', cardsDiv);
 
 // Bonus, put a delete Button on each card so when you click it, the whole card is removed
-  // placed it inside the html string
+// placed it inside the html string
 // select all the buttons!
 const buttons = document.querySelectorAll("button")
 
 // make out delete function
-
+function deleteCard(event) {
+  const clickedButton = event.currentTarget
+  clickedButton.parentElement.remove();
+}
 // loop over them and attach a listener
+buttons.forEach(button => button.addEventListener("click", deleteCard));
