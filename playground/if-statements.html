@@ -13,6 +13,23 @@
     if (10 > 2) {
       console.log('Yep');
     }
+
+    // function slugify(sentence, lowercase) {
+    //   if (lowercase) {
+    //     return sentence.replace(/\s/g, '-').toLowerCase();
+    //   }
+    //   // else
+    //   return sentence.replace(/\s/g, '-');
+    // }
+
+    function slugify(sentence, lowercase) {
+      let slug = sentence.replace(/\s/g, '-');
+      if (lowercase) {
+        return slug.toLowerCase();
+      }
+      // else
+      return slug;
+    }
   </script>
 </body>
 
