@@ -30,6 +30,27 @@
       // else
       return slug;
     }
+
+    const count = 0;
+    const word = count === 1 ? 'item' : 'items';
+
+    const phrase = `You have ${count} ${word} in your cart`;
+    console.log(phrase);
+
+    const isAdmin = true;
+
+    function showAdminBar() {
+      console.log('show');
+    }
+
+    isAdmin && showAdminBar();
+
+    function showX() {
+      console.log('X')
+    }
+
+    if (isAdmin) { showX(); }
+
   </script>
 </body>
 
