@@ -9,7 +9,65 @@
 </head>
 
 <body>
+  <script>
+    function buzzer() {
+      console.log('eeeeeeeeeeng')
+    }
 
+    function bip() {
+      console.log('bip')
+    }
+
+    function uhu() {
+      console.log('uhuuu')
+    }
+
+    // setTimeout(uhu, 300);
+
+    // setTimeout(function () {
+    //   console.log('done');
+    // }, 500);
+
+    // // only runs after the set time, doesn't run immediately
+    // setInterval(bip, 2000)
+
+    // // runs immediately
+    // function setImmediateInterval(funcToRun, ms) {
+    //   // rigth away call the function
+    //   funcToRun();
+    //   // run a regular interval
+    //   return setInterval(funcToRun, ms)
+    // }
+
+    // setImmediateInterval(buzzer, 2000)
+    // setImmediateInterval(uhu, 200)
+
+    function destroy() {
+      document.body.innerHTML = `<p>Destroyed</p>`
+    }
+
+    // save reference in a variable so you can stop it later
+    const bombTimer = setTimeout(destroy, 5000);
+
+    // stop after an event
+    window.addEventListener('click', function () {
+      console.log('saved the world')
+      document.body.innerHTML = `<p>Saved</p>`
+      clearTimeout(bombTimer);
+    })
+
+    // save reference in a variable so you can stop it later
+    const pizzaInterval = setInterval(function () {
+      console.log('🍕');
+      document.body.innerHTML = `<p>🍕</p>`
+    }, 100)
+
+    // stop after a set time
+    setTimeout(function () {
+      clearInterval(pizzaInterval)
+    }, 3000)
+
+  </script>
 </body>
 
 </html>
