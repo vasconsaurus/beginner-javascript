@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title></title>
+  <link rel="stylesheet" href="../base.css">
+</head>
+
+<body>
+  <input type="text" name="first" value="wes">
+
+  <script src="https://unpkg.com/lodash@4.17.21/lodash.js"></script>
+  <script>
+    const hair = 'blond'
+    // object literal
+    const wes = {
+      age: 100, // property: value
+      name: 'wes',
+      hair, // shorthand, same as hair: hair,
+      'cool-dude': true,
+      'really cool': false,
+      '777': true, // add a trailing comma to help when you add more properties (comma dangle)
+      clothing: {
+        shirts: 10,
+        pants: 2
+      },
+      dog: 'snicker',
+      // a method is a function that lives inside of an object
+      sayHello: function (greeting = 'Hey') {
+        return `${greeting} ${this.name}`
+      },
+      // method shorthand
+      sayBye(greeting = 'Bye') {
+        return `${greeting} ${this.name}`
+      },
+      // in an arrow function you dont have access to 'this', do not scope 'this'
+      sneeze: () => {
+        console.log('aaaatchim!')
+      },
+    };
+
+    const person1 = {
+      first: 'wes',
+      last: 'bos',
+      clothing: {
+        shirts: 10,
+        pants: 2,
+      },
+    }
+
+    const person2 = {
+      first: 'wes',
+      last: 'bos',
+    }
+
+    console.log(person1 === person2)
+
+    // we are creating a variable that points to the original object
+    // instead of making a copy
+    const person3 = person1;
+    person3.first = 'Larry'
+    console.log(person3.first)
+    console.log(person1.first)
+
+    // make a copy
+    // they are shallow, only go a level deep
+    // if there are nested objects, and you update them in the copy,
+    // it will update in the original
+    const person4 = { ...person1 }; // spread operator
+    const person5 = Object.assign({}, person2) // Object.assign operator
+    console.log(person4, person5)
+
+    person4.clothing.shirts = 100;
+    console.log(person4.clothing.shirts, person1.clothing.shirts)
+
+    // clone deep, method from lodash library
+    // must be loaded at the beginning
+    // resolves our issue above
+    const person6 = _.cloneDeep(person1)
+
+    person6.clothing.shirts = 400;
+    console.log(person6.clothing.shirts, person1.clothing.shirts)
+
+    // merging with spread operator
+    const meatInventory = {
+      bacon: 2,
+      sausage: 3,
+      duplicate: 3,
+    }
+
+    const veggieInventory = {
+      lettuce: 5,
+      tomatoes: 3,
+      duplicate: 1, // when merging the duplicate, it takes the value from the second object
+    }
+
+    const inventory1 = { ...meatInventory, ...veggieInventory }
+    console.log(inventory1)
+
+    // merge and add
+    const inventory2 = {
+      ...meatInventory,
+      ...veggieInventory,
+      oysters: 10
+   }
+    console.log(inventory2)
+
+    // if you pass in an object or array into a function, it will modify the object outside the function
+    // unlike booleans, numbers and strings
+
+    let name = 'wes'
+
+    function doStuff(data) {
+      data = 'something else';
+      console.log(data);
+    }
+
+    doStuff(name)
+    console.log(name)
+
+    function doStuff2(data) {
+      data.tomatoes = 500;
+      console.log(data);
+    }
+
+    doStuff2(inventory1)
+    console.log(inventory1)
+
+  </script>
+</body>
+
+</html>
