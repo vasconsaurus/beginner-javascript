@@ -9,8 +9,134 @@
 </head>
 
 <body>
+  <ul class='prizes'></ul>
   <script>
+    // Map is similar to Object
 
+    // 1. how does it work?
+
+    // 2. what does it do?
+    // it stores entries as key value pairs, it is for storing data
+
+    // 3. why use it or not over object?
+    // map allows you to use anything as a key, order is guaranteed
+    // you should use a map if you need to mantain the order of your items
+    // JSON does not handle maps, you have to convert it to an object, to convert it to JSON
+
+
+    const person1 = {
+      name: 'wes',
+      age: 200,
+    }
+
+    const myMap = new Map();
+
+    const myOtherMap = new Map([
+      [1, "one"],
+      [2, "two"],
+    ])
+
+    const obj = {
+      1: "one", //converts the number to string
+      2: "two",
+    }
+
+    // .set()
+    myMap.set('name', 'wes') // (key, value)
+    myMap.age = 100; // property on the map but not an actual entry
+    myMap.set(100, 'this is a number') // Map allows to put any type into the key
+    myMap.set(person1, 'Really cool')
+
+    console.log("map – myMap: ", myMap)
+    // .get()
+    console.log("map – myMap, person1: ", myMap.get(person1))
+
+    console.log("map – myOtherMap: ", myOtherMap)
+
+    // keys
+    let iterator = myOtherMap.keys() // map.keys returns an MapIterator, e.g.: MapIterator {1, 2}
+    console.log("map keys: ", iterator)
+    console.log("map – type of keys: ", typeof iterator.next().value) // checks key type, returns number
+
+    console.log(obj)
+    console.log("obj – type of key: ", typeof obj[1]) // checks key type, returns string
+    console.log("obj keys: ", Object.keys(obj)) // returns object keys in an array
+
+    // values
+    console.log("map values: ", myOtherMap.values()); // returns a MapIterator
+    console.log("obj values: ", Object.values(obj));
+
+    // entries
+    console.log("map entries: ", myOtherMap.entries()); // returns a MapIterator
+    console.log("obj entries: ", Object.entries(obj));
+
+    // size
+    console.log("map size: ", myOtherMap.size); // returns a MapIterator
+    console.log("obj size: ", Object.keys(obj).length);
+
+    const score = 300;
+    const prizes = new Map();
+    prizes.set(100, 'Bear')
+    prizes.set(200, 'Duck')
+    prizes.set(300, 'Car')
+
+    console.log(`you win a ${prizes.get(score)}`);
+
+    // select that ul
+    const ul = document.querySelector('.prizes');
+    // Iteration for
+    for (const [points, prize] of prizes) {
+      const li = `<li>${points} - ${prize}</li>`;
+      ul.insertAdjacentHTML('beforeend', li)
+    }
+
+    // Iteration for
+    for (const [key,value] of myOtherMap){
+      console.log("map key/value - for", {key, value})
+    }
+
+    for (const [key,value] of Object.entries(obj)){
+      console.log("obj key/value - for", {key, value})
+    }
+
+    // Iteration forEach
+    myOtherMap.forEach((value, key) => console.log("map key/value - forEach", {key, value}));
+    Object.entries(obj).forEach(([key, value]) => console.log("obj key/value - forEach", {key, value}))
+
+    // Swap keys and values
+
+    // const swapMap = Array.from(myOtherMap).reduce((acc, [key,value]) => {
+    //   acc.set(value, key);
+    //   return acc;
+    // }, new Map());
+    const swapMap = Array.from(myOtherMap).reduce(
+      (acc, [key,value]) => acc.set(value, key),
+      new Map());
+
+    console.log("map swap key/value", swapMap)
+
+    // const swapObj = Object.entries(obj).reduce((acc, [key, value]) => {
+    //   acc[value] = key;
+    //   return acc;
+    // }, {});
+    const swapObj = Object.entries(obj).reduce(
+      (acc, [key, value]) => ({ ...acc, [value]: key }),
+      {}
+    );
+
+    console.log("obj swap key/value", swapObj)
+
+    // .get()
+    console.log("map – get value in key 1: ", myOtherMap.get(1))
+
+    // .has()
+    // checks whether a key exists
+    console.log("map – does key 100 exists?: ", myMap.has(100)) //returns true, since it has that key
+
+    // .delete()
+    // deletes a key
+    myMap.delete('name')
+    console.log("map – delete pair from key name: ", myMap)
   </script>
 </body>
 
