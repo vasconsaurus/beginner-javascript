@@ -11,7 +11,108 @@
 </head>
 
 <body>
+  <script>
+    const names = ['wes', 'kait', 'snickers'];
 
+    console.log(names[0]);
+    console.log(names[names.length - 1]);
+    console.log(names.length);
+
+    // find index of a value
+    const kaitIndex = names.findIndex(name => name === 'kait')
+    console.log(kaitIndex)
+    console.log(names[kaitIndex])
+
+    // SLICE
+    const newNamesWithoutKait = [
+      ...names.slice(0, kaitIndex),
+      ...names.slice(kaitIndex + 1)
+    ];
+
+    console.log(newNamesWithoutKait)
+
+    //or
+    const newNamesWithoutKait2 = [
+      names.slice(0, kaitIndex),
+      names.slice(kaitIndex + 1)
+    ].flat()
+    console.log(newNamesWithoutKait2)
+
+    // REVERSE - Mutation Method
+    const numbers = [1, 2, 3, 4, 5]
+    numbers.reverse()
+    console.log(numbers);
+
+    // if you don't want to modify the original array:
+    const numbers2 = [1, 2, 3, 4, 5]
+    const numbers2Reversed = [...numbers2];
+    numbers2Reversed.reverse();
+    console.log(numbers2Reversed);
+    console.log(numbers2);
+
+    // SLICE - Immutable Method
+    // returns a shallow copy
+    //end is not included, doesn't take the 4
+    const PizzaSlice = numbers.slice(2,4)
+    console.log(PizzaSlice);
+    console.log(numbers);
+
+    const bikes = ['bianchi', 'miele', 'panasonic', 'miyata'];
+
+    // add benotto in the middle
+    const newBikes = [
+      ...bikes.slice(0, 2),
+      'benotto',
+      ...bikes.slice(2)
+    ];
+    console.log(newBikes);
+
+    // remove panasonic
+    const newBikes2 = [
+      ...newBikes.slice(0, 3),
+      ...newBikes.slice(4)
+    ]
+    console.log(newBikes2);
+
+    // SPLICE - Mutation Method
+    const numbers3 = [1, 2, 3, 4, 5];
+    numbers3.splice(3, 2); // start at, how many you should go for
+    console.log(numbers3)
+
+    // PUSH & UNSHIFT - Mutation Method
+    names.push('lux')
+    names.unshift('poppy')
+    console.log(names);
+
+    // if you don't want to modify the original array:
+    const names2 = [...names, 'liz']
+    const names3 = ['patty', ...names]
+    console.log(names2);
+    console.log(names3);
+    console.log(names);
+
+    // delete
+    const comments = [
+      { text: 'Cool Beans', id: 123 },
+      { text: 'Love this', id: 133 },
+      { text: 'Neato', id: 233 },
+      { text: 'good bikes', id: 333 },
+      { text: 'so good', id: 433 },
+    ];
+
+    function deleteComment(id, comments) {
+      // find the index of the item
+      const commentIndex = comments.findIndex(comment => comment.id === id);
+      // make a new array without the item
+      // return new array
+      return [
+        ...comments.slice(0, commentIndex),
+        ...comments.slice(commentIndex + 1),
+      ]
+    }
+
+
+  </script>
 </body>
 
 </html>
