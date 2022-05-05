@@ -41,6 +41,11 @@
       },
     };
 
+    const person0 = {
+      first: 'wes',
+      last: 'bos',
+    }
+
     const person1 = {
       first: 'wes',
       last: 'bos',
@@ -55,7 +60,7 @@
       last: 'bos',
     }
 
-    console.log(person1 === person2)
+    console.log(person0 === person2)
 
     // we are creating a variable that points to the original object
     // instead of making a copy
@@ -103,7 +108,7 @@
     const inventory2 = {
       ...meatInventory,
       ...veggieInventory,
-      oysters: 10
+      oysters: 10,
    }
     console.log(inventory2)
 
