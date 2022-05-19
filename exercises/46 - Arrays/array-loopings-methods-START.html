@@ -253,6 +253,48 @@
     const student3 = students.find(findByProp('first_name', 'Micki'));
     console.log(student3);
 
+
+    console.clear()
+
+    /*
+      reduce
+    */
+
+    function tallyNumbers(accValue, currentValue) {
+      // what happens, step by step
+      console.log(`accumulated value: ${accValue}`);
+      console.log(`current value: ${currentValue}`);
+      console.log('-------');
+      // return the accValue + currentValue
+      return accValue + currentValue;
+    }
+
+    const allOrders = orderTotals.reduce(tallyNumbers, 0); //2nd arg: where do you want to start your tally
+    console.log(allOrders)
+
+    //////////////
+    function inventoryReducer(accItems, item) {
+      accItems[item.type] = accItems[item.type] + 1 || 1;
+      // the same as:
+        // if(accItems[item.type]) {
+        //   accItems[item.type] = accItems[item.type] + 1 //or: accItems[item.type]++;
+        // } else {
+        //   accItems[item.type] = 1;
+        // }
+      // the same as:
+        // accItems[item.type] ? accItems[item.type] + 1 : accItems[item.type] = 1;
+
+      return accItems
+    }
+
+    const inventoryCounts = inventory.reduce(inventoryReducer, {});
+    console.log(inventoryCounts)
+
+    //////////////
+    const totalInventoryPrice = inventory.reduce((accValue, item) => accValue + item.price, 0)
+
+    console.log(totalInventoryPrice)
+
   </script>
 </body>
 
