@@ -39,9 +39,6 @@ const filters = {
     return letter === ' ' ? '_' : letter.toUpperCase()
   },
   camel(letter, index) {
-    index = 5
-    console.log(letter[index])
-
     return letter === ' ' ? letter[index + 1].toUpperCase() : letter
   },
 }
