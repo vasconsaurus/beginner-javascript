@@ -1,6 +1,6 @@
 function Slider(sliderEl) {
-  if(!(sliderEl instanceof Element)) {
-    throw new Error('No slider passed in')
+  if (!(sliderEl instanceof Element)) {
+    throw new Error('No slider passed in');
   }
 
   // create some variables for working with slider
@@ -16,10 +16,10 @@ function Slider(sliderEl) {
   function startSlider() {
     current = sliderEl.querySelector('.current') || slides.firstElementChild;
     prev = current.previousElementSibling || slides.lastElementChild;
-    next = current.nextElementSibling || slides.firstElementChild
+    next = current.nextElementSibling || slides.firstElementChild;
   }
 
-  function applyClasses(params) {
+  function applyClasses() {
     current.classList.add('current');
     prev.classList.add('prev');
     next.classList.add('next');
@@ -34,9 +34,17 @@ function Slider(sliderEl) {
 
     if (direction === 'back') {
       // make an array of the new values, and destructure them over and into the prev, current and next variables
-      [prev, current, next] = [prev.previousElementSibling || slides.lastElementChild, prev, current];
+      [prev, current, next] = [
+        prev.previousElementSibling || slides.lastElementChild,
+        prev,
+        current,
+      ];
     } else {
-      [prev, current, next] = [current, next, next.nextElementSibling || slides.firstElementChild];
+      [prev, current, next] = [
+        current,
+        next,
+        next.nextElementSibling || slides.firstElementChild,
+      ];
     }
 
     applyClasses();
@@ -52,9 +60,9 @@ function Slider(sliderEl) {
   applyClasses();
 
   // event listeners
-  prevButton.addEventListener('click', () => move('back'))
-  nextButton.addEventListener('click', move)
-  slides.addEventListener('keyup', handleArrowDirection)
+  prevButton.addEventListener('click', () => move('back'));
+  nextButton.addEventListener('click', move);
+  slides.addEventListener('keyup', handleArrowDirection);
 }
 
 const mySlider = Slider(document.querySelector('.slider'));
