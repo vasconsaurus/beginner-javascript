@@ -10,6 +10,64 @@
 
 <body>
   <script>
+    function makePizza(toppings = []) {
+      return new Promise(function(resolve, reject) {
+        const amountOfTimetoBake = 500 + (toppings.length * 200);
+        // wait one second for the pizza to cook
+        setTimeout(function () {
+          // when you are ready, you can resolve this promise
+          resolve(`Here is your 🍕 with the toppings: ${toppings.join(', ')}`);
+        }, amountOfTimetoBake);
+        // if something went wrong, you can reject this promise
+      });
+    }
+
+    // const pepperoniPromise = makePizza(['pepperoni']);
+    // const canadianPromise = makePizza(['pepperoni', 'mushrooms', 'onions']);
+
+    // pepperoniPromise.then(function(pizza) {
+    //   console.log('Ah, got it.');
+    //   console.log(pizza);
+    // })
+
+    // console.log(pepperoniPromise);
+    // console.log(canadianPromise);
+
+    // makePizza(['pepperoni'])
+    //   .then(function (pizza) {
+    //     console.log(pizza);
+    //     return makePizza([]);
+    //   })
+    //   .then(function (pizza) {
+    //     console.log(pizza);
+    //     return makePizza(['cheese', 'shrooms', 'feta', 'onion', 'garlic', 'ham']);
+    //   })
+    //   .then(function (pizza) {
+    //     console.log(pizza);
+    //   })
+
+      // run them concurrently
+      const pizzaPromise1 = makePizza(['bellpepper', 'feta', 'garlic'])
+      const pizzaPromise2 = makePizza(['eggplant', 'cheese', 'shrooms', 'feta', 'onion', 'garlic', 'ham'])
+      const pizzaPromise3 = makePizza(['ham', 'cheese'])
+
+      const dinnerPromise = Promise.all([pizzaPromise1, pizzaPromise2, pizzaPromise3]);
+
+      // dinnerPromise.then(function(pizzas) {
+      //   const [hottie, garbagePail, hamAndCheese] = pizzas;
+      //   console.log(hottie, garbagePail, hamAndCheese)
+      // })
+
+      dinnerPromise.then(function([hottie, garbagePail, hamAndCheese]) {
+        console.log(hottie, garbagePail, hamAndCheese)
+      })
+
+      const firstPizzaPromise = Promise.race([pizzaPromise1, pizzaPromise2, pizzaPromise3]);
+
+      firstPizzaPromise.then(pizza => {
+        console.log('you must be hungry');
+        console.log(pizza);
+      })
 
   </script>
 </body>
