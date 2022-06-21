@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Event Loop</title>
+  <link rel="stylesheet" href="../base.css">
+</head>
+
+<body>
+  <div class="go">Click me!</div>
+  <style>
+    .go {
+      margin: 5rem;
+      background: white;
+      padding: 5rem;
+      width: 25rem;
+      height: 25rem;
+      transition: all 0.2s;
+      text-align: center;
+    }
+
+    .go.circle {
+      border-radius: 50%;
+    }
+
+    .go.red {
+      background: red;
+    }
+
+    .go.purple {
+      background: purple;
+      color: white;
+    }
+
+    .go.fadeOut {
+      opacity: 0;
+    }
+  </style>
+  <script>
+    // function wait(ms = 0) {
+    //   return new Promise(function (resolve) {
+    //     setTimeout(resolve, ms)
+    //   });
+    // }
+
+    const wait = (ms = 0) => new Promise(resolve => setTimeout(resolve, ms));
+
+    wait(200).then(() => {
+      console.log('Done!');
+    })
+
+    const go = document.querySelector('.go');
+
+    function animate(e) {
+      const el = e.currentTarget;
+      // text to go
+      el.textContent = 'GO!';
+      // a circle after 2s
+      wait(200)
+      .then(() => {
+        el.classList.add('circle');
+        return wait(500);
+      })
+      .then(() => {
+        // red after 0.5s
+        el.classList.add('red');
+        return wait(250);
+      })
+      .then(() => {
+        // square after 0.25s
+        el.classList.remove('circle');
+        return wait(300)
+      })
+      .then(() => {
+        // purple after 0.3s
+        el.classList.remove('red');
+        el.classList.add('purple');
+        return wait(500)
+      })
+      .then(() => {
+        // fade out after 0.5s
+        el.classList.add('fadeOut')
+      });
+    }
+
+    go.addEventListener('click', animate);
+
+    // change the text to GO when clicked
+    go.addEventListener('clickXXXXX', function (e) {
+      const el = e.currentTarget;
+      // text to go
+      el.textContent = 'GO!'
+      // a circle after 2s
+      setTimeout(function () {
+        el.classList.add('circle');
+        // red after 0.5s
+        setTimeout(function () {
+          el.classList.add('red');
+          // square after 0.25s
+          setTimeout(function () {
+            el.classList.remove('circle');
+            // purple after 0.3s
+            setTimeout(function () {
+              el.classList.remove('red');
+              el.classList.add('purple');
+              // fade out after 0.5s
+              setTimeout(function () {
+                el.classList.add('fadeOut')
+              }, 500)
+            }, 300)
+          }, 250);
+        }, 500);
+      }, 2000);
+    });
+  </script>
+</body>
+
+</html>
