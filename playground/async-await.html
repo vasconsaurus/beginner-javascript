@@ -10,7 +10,77 @@
 
 <body>
   <script>
+    function wait(ms = 0) {
+      return new Promise(function (resolve) {
+        setTimeout(resolve, ms)
+      });
+    }
 
+    async function go() {
+      console.log('start');
+      await wait(2000);
+      console.log('middle');
+      await wait(2000);
+      console.log('end');
+    }
+
+    go();
+
+    function makePizza(toppings = []) {
+      return new Promise(function(resolve, reject) {
+        if(toppings.includes('pineapple')) {
+          reject('get out 🍍');
+        }
+        const amountOfTimetoBake = 500 + (toppings.length * 200);
+        // wait one second for the pizza to cook
+        setTimeout(function () {
+          // when you are ready, you can resolve this promise
+          resolve(`Here is your 🍕 with the toppings: ${toppings.join(', ')}`);
+        }, amountOfTimetoBake);
+        // if something went wrong, you can reject this promise
+      });
+    }
+
+    // async function makeDinner() {
+    //   const pizza1 = await makePizza(['pepperoni']);
+    //   console.log(pizza1);
+    // }
+
+    async function makeDinner() {
+      const pizzaPromise1 = makePizza(['pepperoni']);
+      const pizzaPromise2 = makePizza(['onion']);
+      const [pep, oni] = await Promise.all([pizzaPromise1, pizzaPromise2]);
+      console.log(pep, oni);
+    }
+
+    makeDinner();
+
+    //  function declaration
+    async function  fd() { }
+
+    // arrow function
+    const arrowFn = async () => { }
+
+    // call back
+    window.addEventListener('click', async function () {
+
+    })
+
+    // object
+    const person = {
+      // method
+      sayHi: async function () {
+
+      },
+      // method shorthand
+      async sayHello() {
+
+      },
+      // function property
+      sayHey: async () => {
+
+      }
+    }
   </script>
 </body>
 

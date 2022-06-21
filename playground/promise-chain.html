@@ -53,37 +53,55 @@
 
     const go = document.querySelector('.go');
 
-    function animate(e) {
+    async function animate(e) {
       const el = e.currentTarget;
       // text to go
       el.textContent = 'GO!';
       // a circle after 2s
-      wait(200)
-      .then(() => {
-        el.classList.add('circle');
-        return wait(500);
-      })
-      .then(() => {
-        // red after 0.5s
-        el.classList.add('red');
-        return wait(250);
-      })
-      .then(() => {
-        // square after 0.25s
-        el.classList.remove('circle');
-        return wait(300)
-      })
-      .then(() => {
-        // purple after 0.3s
-        el.classList.remove('red');
-        el.classList.add('purple');
-        return wait(500)
-      })
-      .then(() => {
-        // fade out after 0.5s
-        el.classList.add('fadeOut')
-      });
+      await wait(200);
+      el.classList.add('circle');
+      await wait(500);
+      el.classList.add('red');
+      await wait(250);
+      el.classList.remove('circle');
+      await wait(300);
+      el.classList.remove('red');
+      el.classList.add('purple');
+      await wait(500);
+      el.classList.add('fadeOut');
     }
+
+    // function animate(e) {
+    //   const el = e.currentTarget;
+    //   // text to go
+    //   el.textContent = 'GO!';
+    //   // a circle after 2s
+    //   wait(200)
+    //   .then(() => {
+    //     el.classList.add('circle');
+    //     return wait(500);
+    //   })
+    //   .then(() => {
+    //     // red after 0.5s
+    //     el.classList.add('red');
+    //     return wait(250);
+    //   })
+    //   .then(() => {
+    //     // square after 0.25s
+    //     el.classList.remove('circle');
+    //     return wait(300)
+    //   })
+    //   .then(() => {
+    //     // purple after 0.3s
+    //     el.classList.remove('red');
+    //     el.classList.add('purple');
+    //     return wait(500)
+    //   })
+    //   .then(() => {
+    //     // fade out after 0.5s
+    //     el.classList.add('fadeOut')
+    //   });
+    // }
 
     go.addEventListener('click', animate);
 
