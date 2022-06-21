@@ -12,6 +12,9 @@
   <script>
     function makePizza(toppings = []) {
       return new Promise(function(resolve, reject) {
+        if(toppings.includes('pineapple')) {
+          reject('get out 🍍');
+        }
         const amountOfTimetoBake = 500 + (toppings.length * 200);
         // wait one second for the pizza to cook
         setTimeout(function () {
@@ -33,18 +36,20 @@
     // console.log(pepperoniPromise);
     // console.log(canadianPromise);
 
-    // makePizza(['pepperoni'])
-    //   .then(function (pizza) {
-    //     console.log(pizza);
-    //     return makePizza([]);
-    //   })
-    //   .then(function (pizza) {
-    //     console.log(pizza);
-    //     return makePizza(['cheese', 'shrooms', 'feta', 'onion', 'garlic', 'ham']);
-    //   })
-    //   .then(function (pizza) {
-    //     console.log(pizza);
-    //   })
+    makePizza(['pepperoni'])
+      .then(function (pizza) {
+        console.log(pizza);
+        return makePizza(['pineapple']);
+      })
+      .then(function (pizza) {
+        console.log(pizza);
+        return makePizza(['cheese', 'shrooms', 'feta', 'onion', 'garlic', 'ham']);
+      })
+      .then(function (pizza) {
+        console.log(pizza);
+      })
+      .catch(handleError);
+      // it catches the error and stops the chain, so the other pizzas also sdont get made
 
       // run them concurrently
       const pizzaPromise1 = makePizza(['bellpepper', 'feta', 'garlic'])
@@ -67,6 +72,26 @@
       firstPizzaPromise.then(pizza => {
         console.log('you must be hungry');
         console.log(pizza);
+      })
+
+      function handleError(err) {
+        console.log('on noes');
+        console.log(err);
+      }
+
+      // a then will run when a promise is successfull, catch when it isnt
+      makePizza(['cheese', 'pineapple'])
+      .then(pizza => {
+        console.log(pizza);
+      }).catch(handleError)
+
+      const p1 = makePizza(['pep']);
+      const p2 = makePizza(['pineapple'])
+
+      const dinnerPromise2 = Promise.allSettled([p1, p2]);
+
+      dinnerPromise2.then(results => {
+        console.log(results);
       })
 
   </script>
