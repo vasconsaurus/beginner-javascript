@@ -32,6 +32,58 @@
       });
     }
 
+    // try and catch
+    // async function go() {
+    //   try {
+    //     const pizza = await makePizza(['pineapple']);
+    //     console.log(pizza);
+    //   } catch (err) {
+    //     console.log(err);
+    //   }
+    // }
+
+    function handleError(err) {
+      console.log('oh noes');
+      console.log(err);
+    }
+    // async function go() {
+    //   const pizza = await makePizza(['pineapple']).catch(handleError);
+    //   console.log(pizza);
+    // }
+
+    // go();
+
+    // when you mark a function as async it will always return a promise
+    // so you can use .then and .catch with them
+    async function go() {
+      // window.doesdoes(); // catch in the call will also catch this error
+      const pizza = await makePizza(['pineapple']);
+      console.log(pizza);
+    }
+
+    // catch it at run time
+    go().catch(handleError);
+
+    // make a safe function with a high order function
+    function makeSafe(fn, errorHandler) {
+      return function() {
+        fn().catch(errorHandler);
+      };
+    }
+
+    const safeGo = makeSafe(go, handleError);
+
+    safeGo();
+
+    // go().then(result => {
+    //   console.log(result);
+    // }).catch(handleError);
+
+    // async function goGo() {
+    //   const result = await go();
+    // }
+
+    // goGo().catch(handleError);
   </script>
 </body>
 
