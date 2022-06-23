@@ -1,7 +1,5 @@
-<!-- prettier-ignore -->
-
 function wait(ms = 0) {
-  return new Promise(resolve => setTimeout(resolve, ms));
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 async function destroyPopup(popup) {
@@ -13,12 +11,13 @@ async function destroyPopup(popup) {
 }
 
 function ask(options) {
-  return new Promise(async function (resolve) {
+  return new Promise(async (resolve) => {
     // 1. we need to create a popup with all the fields in it
     const popup = document.createElement('form'); // this will immediately return us a dom node
-    popup.classList.add('popup')
-    popup.insertAdjacentHTML('afterbegin',
-    `<fieldset>
+    popup.classList.add('popup');
+    popup.insertAdjacentHTML(
+      'afterbegin',
+      `<fieldset>
         <label>${options.title}</label>
         <input type="text" name="input"/>
         <button type="submit">Submit</button>
@@ -27,26 +26,31 @@ function ask(options) {
     );
 
     // 2. check if they want a cancel button
-    if(options.cancel) {
+    if (options.cancel) {
       const skipButton = document.createElement('button');
       skipButton.type = 'button';
       skipButton.textContent = 'Cancel';
       popup.firstElementChild.appendChild(skipButton);
       // listen for a click on cancel button
-      skipButton.addEventListener('click', function() {
-        resolve(null);
-        destroyPopup(popup);
-      },
-      { once: true })
+      skipButton.addEventListener(
+        'click',
+        () => {
+          resolve(null);
+          destroyPopup(popup);
+        },
+        { once: true }
+      );
     }
     // 3. listen for the submit event on the inputs
-    popup.addEventListener('submit', function(e) {
-      e.preventDefault();
-      resolve(e.target.input.value)
-      // remove it from the dom entirely
-      destroyPopup(popup)
-    },
-    { once: true }
+    popup.addEventListener(
+      'submit',
+      (e) => {
+        e.preventDefault();
+        resolve(e.target.input.value);
+        // remove it from the dom entirely
+        destroyPopup(popup);
+      },
+      { once: true }
     );
     // 4. when submited, resolve the data that was inputed
     // insert that popup into the dom
@@ -63,12 +67,12 @@ async function askQuestion(e) {
   const answer = await ask({
     title: button.dataset.question,
     cancel: shouldCancel,
- })
+  });
 }
 
 // select all buttons that have a question
 const buttons = document.querySelectorAll('[data-question]');
-buttons.forEach(button => button.addEventListener('click', askQuestion))
+buttons.forEach((button) => button.addEventListener('click', askQuestion));
 
 const questions = [
   { title: 'What is your name?' },
@@ -87,13 +91,13 @@ const questions = [
 
 async function asyncMap(array, callback) {
   const results = [];
-  for (const item of array ) {
+  for (const item of array) {
     // const result = await callback(item);
     // results.push(result);
     // or
     results.push(await callback(item));
   }
-  return results
+  return results;
 }
 
 async function go() {
