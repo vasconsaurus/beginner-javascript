@@ -10,6 +10,24 @@
     .search {
       display: grid;
       grid-template-columns: 1fr;
+      margin-bottom: 2rem;
+    }
+
+    button[disabled] {
+      opacity: 0.2;
+    }
+
+    .recipes {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .recipe {
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      display: flex;
+      flex-flow: column nowrap;
     }
   </style>
 </head>
@@ -17,7 +35,7 @@
 <body>
   <div class="wrapper">
     <form class="search" autocomplete="off">
-      <input type="text" name="query">
+      <input type="text" name="query" value="pizza">
       <button name="submit" type="submit">Submit</button>
     </form>
     <div class="recipes"></div>
