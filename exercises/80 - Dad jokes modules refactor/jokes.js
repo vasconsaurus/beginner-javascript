@@ -1,7 +1,4 @@
-import { jokeButton } from "./elements.js";
-import { handleClick } from "./handlers.js";
-import { fetchJoke } from "./lib.js";
+import { handleClick } from "./lib/handlers.js";
+import { jokeButton } from "./lib/elements.js";
 
 jokeButton.addEventListener('click', handleClick);
-
-fetchJoke();

@@ -1,8 +1,5 @@
-import { loader, jokeButton } from "./elements.js";
-
-export async function fetchJoke() {
+export async function fetchJoke(loader) {
   loader.classList.remove('hidden')
-  jokeButton.classList.add('hidden')
   const response = await fetch('https://icanhazdadjoke.com/', {
     headers: {
       Accept: 'application/json',
@@ -10,7 +7,5 @@ export async function fetchJoke() {
   });
   const data = await response.json();
   loader.classList.add('hidden')
-  jokeButton.classList.remove('hidden')
-
   return data;
 }
