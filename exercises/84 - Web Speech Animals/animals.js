@@ -3,4 +3,12 @@ export const animals = [
   'cobra',
   'aranha',
   'tucano',
+  'baleia',
+  'tigre',
+  'coelho',
+  'bicho-pau',
+  'borboleta',
+  'tartaruga',
+  'sapo',
+  'rinoceronte',
 ];
